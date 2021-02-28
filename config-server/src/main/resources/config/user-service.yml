@@ -1,0 +1,6 @@
+server:
+  port: 0
+
+user:
+   limit: 10
+   name: deneme

@@ -22,7 +22,7 @@ public class PaymentController {
 
         log.info("Called payment-service");
         Boolean forbidden = userClient.idForbidden(1L);
-        log.info("forbidden  response :{}",forbidden);
+        log.info("forbidden  response :{}", forbidden);
         return ResponseEntity.ok(forbidden);
     }
 

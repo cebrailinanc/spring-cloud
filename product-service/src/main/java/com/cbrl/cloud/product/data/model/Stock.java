@@ -1,28 +1,20 @@
-package com.cbrl.cloud.payment.model;
+package com.cbrl.cloud.product.data.model;
 
 import lombok.Data;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-public class Payment {
-
+public final class Stock {
     @Id
+    @GeneratedValue
     private Long id;
 
-    @Column(name = "user_id")
-    private Long userId;
-
-    @Column(name = "order_id")
-    private Long orderId;
-
-    @Column(name = "product_id")
     private Long productId;
 
-    private BigDecimal amount;
+    private Long count;
 
     @Column(updatable = false)
     private LocalDateTime created;
@@ -32,7 +24,6 @@ public class Payment {
     @PrePersist
     void onCreate() {
         this.setCreated(LocalDateTime.now());
-        this.setModified(LocalDateTime.now());
     }
 
     @PreUpdate

@@ -21,11 +21,11 @@ public class UserController {
     private final UserRepository repository;
 
     @GetMapping("/{user-id}")
-    public ResponseEntity<Boolean> isForbidden(@PathVariable("user-id") Long id){
+    public ResponseEntity<Boolean> isForbidden(@PathVariable("user-id") Long id) {
         log.info("called user-service...........");
         Optional<User> entity = repository.findById(id);
 
-        if(entity.isPresent())
+        if (entity.isPresent())
             return ResponseEntity.ok(entity.get().getForbidden());
         return ResponseEntity.ok(Boolean.FALSE);
     }

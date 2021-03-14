@@ -1,7 +1,7 @@
-package com.cbrl.cloud.product.api.advice;
+package com.cbrl.cloud.product.api.error.handling.advice.handler;
 
-import com.cbrl.cloud.product.api.response.ApiError;
-import com.cbrl.cloud.product.api.response.ApiResponse;
+import com.cbrl.cloud.product.api.error.handling.advice.response.ApiError;
+import com.cbrl.cloud.product.api.error.handling.advice.response.ApiResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

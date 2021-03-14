@@ -1,11 +1,17 @@
-package com.cbrl.cloud.product.api.response;
+package com.cbrl.cloud.product.api.error.handling.advice.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
 public class ApiResponse {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+    private LocalDateTime timestamp;
+    private Status status;
+    private Object data;
+    private ApiError error;
 
     private ApiResponse(Status status) {
         timestamp = LocalDateTime.now();
@@ -23,11 +29,6 @@ public class ApiResponse {
         this.status = status;
         this.data = data;
     }
-
-    private LocalDateTime timestamp;
-    private Status status;
-    private Object data;
-    private ApiError error;
 
     public enum Status {
         SUCCESS, // success request

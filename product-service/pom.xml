@@ -65,6 +65,19 @@
             <version>${mapstruct.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.jeasy/easy-random -->
+        <!-- Easy Random is a library that generates random Java beans-->
+        <dependency>
+            <groupId>org.jeasy</groupId>
+            <artifactId>easy-random-core</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>

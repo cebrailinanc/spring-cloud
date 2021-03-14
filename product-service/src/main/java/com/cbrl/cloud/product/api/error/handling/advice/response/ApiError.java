@@ -1,4 +1,4 @@
-package com.cbrl.cloud.product.api.response;
+package com.cbrl.cloud.product.api.error.handling.advice.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

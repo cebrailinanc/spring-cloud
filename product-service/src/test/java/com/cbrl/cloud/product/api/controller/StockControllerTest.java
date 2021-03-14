@@ -1,24 +1,28 @@
 package com.cbrl.cloud.product.api.controller;
 
-import com.cbrl.cloud.product.api.response.ApiResponse;
+import com.cbrl.cloud.product.api.error.handling.advice.response.ApiResponse;
 import com.cbrl.cloud.product.dto.CheckStockDto;
 import com.cbrl.cloud.product.dto.mapper.StockMapper;
 import com.cbrl.cloud.product.service.StockService;
+import lombok.extern.log4j.Log4j2;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+@Log4j2
 @WebMvcTest(value = StockController.class)
 class StockControllerTest {
     @Autowired
@@ -26,6 +30,7 @@ class StockControllerTest {
 
     @MockBean
     private StockService stockService;
+
     @MockBean
     private StockMapper stockMapper;
 
@@ -118,5 +123,25 @@ class StockControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.error.message", Matchers.notNullValue()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.error.fieldErrors", Matchers.hasSize(2)));
     }
+
+    /**
+     * JSONassert
+     */
+    @Test
+    void createStock_FailCheckJSONassert_IfRequestIsInvalid() throws Exception {
+        MvcResult result = this.mockMvc.perform(post("/stock")
+                .content("{\"productId\":0,\"count\":0}")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.timestamp", Matchers.notNullValue()))
+                .andReturn();
+
+        log.info("response: {}", result.getResponse().getContentAsString());
+        String actual = " {\"data\":null, \"status\":\"FAIL\",\"error\":{\"code\":\"000\",\"message\":\"Invalid request\",\"fieldErrors\":[{\"field\":\"count\",\"rejectedValue\":0,\"message\":\"must be greater than or equal to 1\"},{\"field\":\"productId\",\"rejectedValue\":0,\"message\":\"must be greater than or equal to 1\"}]}}\n";
+        JSONAssert.assertEquals(actual, result.getResponse().getContentAsString(), false);
+    }
+
 
 }

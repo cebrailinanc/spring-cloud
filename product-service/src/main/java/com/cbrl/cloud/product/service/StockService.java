@@ -7,4 +7,7 @@ public interface StockService {
     CheckStockDto checkStock(Long productId, Long count);
 
     void createStock(StockDto dto);
+
+    void addStock(StockDto dto);
+
 }

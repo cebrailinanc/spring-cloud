@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.cbrl.cloud</groupId>
-    <artifactId>euraka-server</artifactId>
+    <artifactId>eureka-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>euraka-server</name>
-    <description>Euraka server project for Spring Boot</description>
+    <name>eureka-server</name>
+    <description>eureka server project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
         <spring-cloud.version>2020.0.1</spring-cloud.version>

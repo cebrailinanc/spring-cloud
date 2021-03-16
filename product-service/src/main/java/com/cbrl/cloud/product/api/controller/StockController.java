@@ -30,4 +30,10 @@ public class StockController {
         stockService.createStock(stockMapper.toStockDto(request));
         return ApiResponse.success();
     }
+
+    @PutMapping
+    public ApiResponse addStock(@Valid @RequestBody StockRequest request) {
+        stockService.addStock(stockMapper.toStockDto(request));
+        return ApiResponse.success();
+    }
 }

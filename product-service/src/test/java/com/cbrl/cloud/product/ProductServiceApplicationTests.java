@@ -6,7 +6,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest  //This annotation helps in writing integration tests.
 class ProductServiceApplicationTests {
 
     @Test

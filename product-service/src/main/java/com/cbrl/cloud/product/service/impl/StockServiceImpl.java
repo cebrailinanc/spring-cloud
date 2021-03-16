@@ -31,10 +31,17 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public void createStock(StockDto dto) {
-        Optional<Stock> byProductId = repository.findByProductId(dto.getProductId());
-        byProductId.ifPresent(stock -> {
+        Optional<Stock> entity = repository.findByProductId(dto.getProductId());
+        entity.ifPresent(stock -> {
             throw new BusinessException("stock.product-exist", stock.getProductId());
         });
         repository.save(stockMapper.toStock(dto));
+    }
+
+    @Override
+    public void addStock(StockDto dto) {
+        Optional<Stock> entity = repository.findByProductId(dto.getProductId());
+        entity.orElseThrow(() -> new BusinessException("stock.product-not-found", dto.getProductId()));
+        repository.addStock(dto.getCount(), dto.getProductId());
     }
 }

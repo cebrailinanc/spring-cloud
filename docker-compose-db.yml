@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  mysql-db:
+    image: mysql:latest
+    container_name: mysql-db
+    environment:
+      MYSQL_DATABASE: "db"
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - 3306:3306
+      # <Port exposed> : < MySQL Port running inside container>
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - mysql-db
+    environment:
+      PMA_CONTROLUSER: admin
+      PMA_CONTROLPASS: admin
+      PMA_USER: root
+      PMA_PASSWORD: root
+      PMA_HOST: mysql-db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+  mongo-db:
+    image: mongo
+    container_name: mongo-db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mpass
+      MONGO_INITDB_DATABASE: project
+    ports:
+      - 27017:27017
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8082:8081
+    links:
+      - mongo-db
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo-db
+      #      ME_CONFIG_BASICAUTH_USERNAME: admin
+      #      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mpass

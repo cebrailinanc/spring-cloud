@@ -5,11 +5,13 @@ import com.cbrl.cloud.product.data.repository.StockRepository;
 import com.cbrl.cloud.product.dto.CheckStockDto;
 import com.cbrl.cloud.product.dto.mapper.StockMapper;
 import com.cbrl.cloud.product.service.impl.StockServiceImpl;
+import org.assertj.core.api.BDDAssertions;
 import org.jeasy.random.EasyRandom;
 import org.jeasy.random.EasyRandomParameters;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -47,7 +49,9 @@ class StockServiceTest {
         Mockito.when(repository.findByProductId(Mockito.anyLong()))
                 .thenReturn(Optional.of(easyRandom.nextObject(Stock.class)));
         CheckStockDto checkStockDto = stockService.checkStock(2L, 3L);
+        //BDDMockito.given().
 
+       // BDDAssertions
         Assertions.assertFalse(checkStockDto.getExistStock());
     }
 

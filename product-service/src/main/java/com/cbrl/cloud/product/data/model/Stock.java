@@ -1,19 +1,23 @@
 package com.cbrl.cloud.product.data.model;
 
 import lombok.Data;
-
-import javax.persistence.*;
+import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
+@NoArgsConstructor
 public final class Stock {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private Long productId;
 
+    @NotNull
     private Long count;
 
     @Column(updatable = false)

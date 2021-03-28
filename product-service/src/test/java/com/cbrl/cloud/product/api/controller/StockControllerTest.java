@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
+import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
@@ -33,6 +33,15 @@ class StockControllerTest {
 
     @MockBean
     private StockMapper stockMapper;
+
+    @Test
+    void bdd_Test() {
+        //given
+        BDDMockito.given(stockService.checkStock(ArgumentMatchers.anyLong(), ArgumentMatchers.anyLong()))
+                .willReturn(CheckStockDto.builder().existStock(true).build());
+        //when //then
+
+    }
 
     @Test
     void checkStock_Success_IfRequestIsValid() throws Exception {
@@ -53,7 +62,7 @@ class StockControllerTest {
 
     @Test
     void checkStock_Error_IfRequestIsValid() throws Exception {
-      //  Mockito.when(stockService.checkStock(ArgumentMatchers.anyLong(), ArgumentMatchers.anyLong())).thenThrow(RuntimeException.class);
+        //  Mockito.when(stockService.checkStock(ArgumentMatchers.anyLong(), ArgumentMatchers.anyLong())).thenThrow(RuntimeException.class);
         Mockito.doThrow(new RuntimeException("Product not found"))
                 .when(stockService).checkStock(ArgumentMatchers.anyLong(), ArgumentMatchers.anyLong());
         Long productId = 123L;

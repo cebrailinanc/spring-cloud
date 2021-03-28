@@ -10,10 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ProductServiceApplicationTests {
 
     @Test
-    void contextLoads() {
-    }
-
-    @Test
     void JSONAssert() throws JSONException {
 
         String actual = "{id:123,name:\"John\",zip:\"33025\"}";

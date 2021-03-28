@@ -1,6 +1,5 @@
 server:
   port: 0
-
 spring:
   h2:
     console:
@@ -12,7 +11,7 @@ spring:
     username: sa
     password:
     driverClassName: org.h2.Driver
-spring
+
 eureka:
   client:
     service-url:

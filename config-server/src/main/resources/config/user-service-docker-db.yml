@@ -2,17 +2,13 @@ server:
   port: 0
 
 spring:
-  h2:
-    console:
-      enabled: true
-      settings:
-        web-allow-others: true
+  jpa:
+    hibernate:
+      ddl-auto: update
   datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
-    driverClassName: org.h2.Driver
-
+    url: jdbc:mysql://localhost:3306/user-service-db
+    username: root
+    password: root
 eureka:
   client:
     service-url:

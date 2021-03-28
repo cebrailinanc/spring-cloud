@@ -19,4 +19,7 @@ public interface StockRepository extends JpaRepository<Stock, Long> {
     @Modifying(clearAutomatically = true)
     @Query("update Stock s set s.count = s.count + :addCount where s.productId = :productIdParam")
     void addStock(@Param("addCount") Long count, @Param("productIdParam") Long productId);
+
+    @Query("select sum(s.count) from Stock  s where s.productId =s.productId ")
+    Long getAllStockCount();
 }

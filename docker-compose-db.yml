@@ -5,8 +5,13 @@ services:
     image: mysql:latest
     container_name: mysql-db
     environment:
-      MYSQL_DATABASE: "db"
+      #  MYSQL_DATABASE: "test-db"
       MYSQL_ROOT_PASSWORD: "root"
+    entrypoint:
+      sh -c "
+      echo 'CREATE DATABASE IF NOT EXISTS `product-service-db`; CREATE DATABASE IF NOT EXISTS `user-service-db`;' > /docker-entrypoint-initdb.d/init.sql;
+      /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      "
     ports:
       - 3306:3306
       # <Port exposed> : < MySQL Port running inside container>

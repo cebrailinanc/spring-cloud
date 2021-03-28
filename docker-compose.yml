@@ -3,13 +3,11 @@ version: '3'
 services:
   config-server:
     build:
-      context: ./config-server
-      dockerfile: ./Dockerfile
+      context: config-server
     ports:
       - "8888:8888"
   eureka-server:
     build:
-      context: ./eureka-server
-      dockerfile: ./Dockerfile
+      context: eureka-server
     ports:
       - "8761:8761"

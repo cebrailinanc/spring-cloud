@@ -1,4 +1,4 @@
-`docker compose up` command execute in spring-cloud folder.
+`docker compose up --build` command execute in spring-cloud folder.
 Docker compose running  config server and eureka server
 
 eureka server: `http://localhost:8761`

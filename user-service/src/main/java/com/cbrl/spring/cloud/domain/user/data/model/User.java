@@ -1,4 +1,4 @@
-package com.cbrl.spring.cloud.user.model;
+package com.cbrl.spring.cloud.domain.user.data.model;
 
 import lombok.AccessLevel;
 import lombok.Data;

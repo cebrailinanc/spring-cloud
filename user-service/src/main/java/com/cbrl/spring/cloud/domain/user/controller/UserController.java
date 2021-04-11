@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController extends BaseController<UserService> {
 
     @GetMapping("/{user-id}")
-    public ApiResponse hello(@PathVariable("user-id") Long id) {
+    public ApiResponse getUser(@PathVariable("user-id") Long id) {
         return run(service.getUser(id));
     }
+
 }

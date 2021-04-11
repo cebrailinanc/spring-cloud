@@ -15,6 +15,4 @@ public class BusinessException extends RuntimeException {
         this.errorKey = errorKey;
         this.args = args;
     }
-
-
 }
